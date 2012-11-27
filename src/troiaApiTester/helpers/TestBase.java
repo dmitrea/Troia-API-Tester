@@ -18,15 +18,11 @@ public abstract class TestBase {
 	public ClientResponse InvokeGetRequest(String uri, String resourcePath) {
 		WebResource webResource = new Client().resource(uri).path(resourcePath);
 		return webResource.get(ClientResponse.class);
-		//CheckHttpResponse(response);
-		//return response.getEntity(String.class);
 	}
 
 	public ClientResponse InvokeGetRequest(String uri, String resourcePath, MultivaluedMap<String, String> queryParams) {
 	    WebResource webResource = new Client().resource(uri).path(resourcePath).queryParams(queryParams);
 		return webResource.get(ClientResponse.class);
-		//CheckHttpResponse(response);
-		//return response.getEntity(String.class);
 	}
 	
 	public ClientResponse InvokePostRequest(String Uri, String resourcePath, Form formData)
@@ -36,10 +32,7 @@ public abstract class TestBase {
         Client client = Client.create(clientConfig);
         WebResource webResource = client.resource(SERVER_BASE_URL).path(resourcePath);
         return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class, formData);
-        //CheckHttpResponse(response);
-        //return response.getEntity(String.class);		
 	}
-	
 	
 	public int GetHttpResponse(ClientResponse response){
 		return response.getStatus();
