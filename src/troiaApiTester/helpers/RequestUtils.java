@@ -11,7 +11,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.representation.Form;
 
-public abstract class RequestUtils {
+public class RequestUtils {
 
 	public static String SERVER_BASE_URL = "http://localhost:8080/GetAnotherLabel/rest";
 	
