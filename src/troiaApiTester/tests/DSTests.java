@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.representation.Form;
 
-public class DSTests extends TestBase {
+public class DSTests {
 	public static String nonExistingModelID = "test12345";
 	public static String existingModelID = "12345";
 	
@@ -33,7 +33,7 @@ public class DSTests extends TestBase {
 		
 		formData.add("labels", goldLabels);
 		
-		ClientResponse serverResponse = InvokePostRequest(SERVER_BASE_URL, resourcePath, formData);
+		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
         
 		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
@@ -61,7 +61,7 @@ public class DSTests extends TestBase {
 		
 		formData.add("labels", goldLabels);
 		
-		ClientResponse serverResponse = InvokePostRequest(SERVER_BASE_URL, resourcePath, formData);
+		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
 		
         BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
@@ -83,7 +83,7 @@ public class DSTests extends TestBase {
 		
 		formData.add("label", goldLabels);
 
-		ClientResponse serverResponse = InvokePostRequest(SERVER_BASE_URL, resourcePath, formData);
+		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
         
 		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
@@ -105,7 +105,7 @@ public class DSTests extends TestBase {
 		
 		formData.add("label", goldLabels);
 
-		ClientResponse serverResponse = InvokePostRequest(SERVER_BASE_URL, resourcePath, formData);
+		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
 		
         BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
@@ -129,7 +129,7 @@ public class DSTests extends TestBase {
 		
 		formData.add("label", labels);
 
-		ClientResponse serverResponse = InvokePostRequest(SERVER_BASE_URL, resourcePath, formData);
+		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
         
 		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
@@ -161,7 +161,7 @@ public class DSTests extends TestBase {
 		categories.add(category2);
 
 		formData.add("categories", categories);
-		ClientResponse serverResponse = InvokePostRequest(SERVER_BASE_URL, resourcePath, formData);
+		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
         BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
 			
         Assert.assertEquals("Built a request model with 2 categories", baseServerResponse.getMessage().trim());
