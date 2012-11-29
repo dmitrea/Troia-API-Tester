@@ -2,6 +2,6 @@ package troiaApiTester.helpers;
 
 public interface IServerResponse {
 	
-	IServerResponse GetGsonResponse(String stringResponse); 
+	IServerResponse getResponseFromJson(String stringResponse); 
 	
 }

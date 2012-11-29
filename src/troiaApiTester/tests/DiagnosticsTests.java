@@ -23,7 +23,7 @@ public class DiagnosticsTests {
 		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath);
 		Assert.assertEquals(200, serverResponse.getStatus());
 		
-		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class));
+		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
 		Assert.assertEquals("Request successfully processed", baseServerResponse.getMessage());
 		Assert.assertEquals("Success", baseServerResponse.getStatus());
 	}
@@ -34,7 +34,7 @@ public class DiagnosticsTests {
 		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath);
 		Assert.assertEquals(200, serverResponse.getStatus());
 		
-		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class));
+		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
 		Assert.assertEquals("Object has been inserted to the DB and removed from the DB", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Success", baseServerResponse.getStatus());
 	}
@@ -47,7 +47,7 @@ public class DiagnosticsTests {
 		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath, params);
 		Assert.assertEquals(200, serverResponse.getStatus());
 
-		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class));
+		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
 		Assert.assertEquals("Request model with id: 12345 does not exist", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Failure", baseServerResponse.getStatus());
 	}
@@ -60,7 +60,7 @@ public class DiagnosticsTests {
 		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath, params);
 		Assert.assertEquals(200, serverResponse.getStatus());
 
-		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class));
+		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
 		Assert.assertEquals("Request model with id: " + existingModelID + " exists", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Success", baseServerResponse.getStatus());
 	}
@@ -73,7 +73,7 @@ public class DiagnosticsTests {
 		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath, params);
 		Assert.assertEquals(200, serverResponse.getStatus());
 
-		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class));
+		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
 		Assert.assertEquals("Job with id " + nonExistingModelID + " doesn't exist", baseServerResponse.getMessage());
 		Assert.assertEquals("Failure", baseServerResponse.getStatus());
 	}
@@ -86,7 +86,7 @@ public class DiagnosticsTests {
 		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath, params);
 		Assert.assertEquals(200, serverResponse.getStatus());
 
-		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class));
+		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
 		Assert.assertEquals("Reset the ds model with id: " + existingModelID, baseServerResponse.getMessage());
 		Assert.assertEquals("Success", baseServerResponse.getStatus());
 	}

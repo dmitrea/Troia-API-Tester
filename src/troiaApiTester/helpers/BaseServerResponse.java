@@ -41,7 +41,7 @@ public class BaseServerResponse implements IServerResponse {
 	}
 
 	@Override
-	public BaseServerResponse GetGsonResponse(String stringResponse) {
+	public BaseServerResponse getResponseFromJson(String stringResponse) {
 		// TODO Auto-generated method stub
 		return new Gson().fromJson(stringResponse, this.getClass());
 	}

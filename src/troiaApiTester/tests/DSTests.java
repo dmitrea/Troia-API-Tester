@@ -40,7 +40,7 @@ public class DSTests {
 		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
         
-		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
+		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
         Assert.assertEquals("Job with id " + nonExistingModelID +" doesn't exist", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Failure", baseServerResponse.getStatus());
 	}
@@ -68,7 +68,7 @@ public class DSTests {
 		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
 		
-        BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
+        BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
         Assert.assertEquals("Loaded 2 gold labels", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Success", baseServerResponse.getStatus());
 	}
@@ -90,7 +90,7 @@ public class DSTests {
 		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
         
-		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
+		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
         Assert.assertEquals("Job with id " + nonExistingModelID + " doesn't exist", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Failure", baseServerResponse.getStatus());
 	}
@@ -112,7 +112,7 @@ public class DSTests {
 		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
 		
-        BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
+        BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
         //Assert.assertEquals("Loaded gold label ... ", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Success", baseServerResponse.getStatus());
 	}
@@ -136,7 +136,7 @@ public class DSTests {
 		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
 		Assert.assertEquals(200, serverResponse.getStatus());
         
-		BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
+		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
         Assert.assertEquals("Job with id 12345 doesn't exist", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Failure", baseServerResponse.getStatus());
 	}
@@ -166,7 +166,7 @@ public class DSTests {
 
 		formData.add("categories", categories);
 		ClientResponse serverResponse = RequestUtils.InvokePostRequest(RequestUtils.SERVER_BASE_URL, resourcePath, formData);
-        BaseServerResponse baseServerResponse = new BaseServerResponse().GetGsonResponse(serverResponse.getEntity(String.class)); 
+        BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
 			
         Assert.assertEquals("Built a request model with 2 categories", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Success", baseServerResponse.getStatus());
