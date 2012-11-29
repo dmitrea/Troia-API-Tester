@@ -1,10 +1,14 @@
 package troiaApiTester.tests;
 
-import troiaApiTester.helpers.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
 import junit.framework.Assert;
+
 import org.junit.Test;
+
+import troiaApiTester.helpers.BaseServerResponse;
+import troiaApiTester.helpers.RequestUtils;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.representation.Form;
@@ -20,7 +24,7 @@ public class DSTests {
 		Form formData = new Form();
 		formData.add("id", nonExistingModelID);
 		
-		ArrayList<Hashtable<String, String>> goldLabels = new ArrayList<>();
+		ArrayList<Hashtable<String, String>> goldLabels = new ArrayList<Hashtable<String, String>>();
 		Hashtable<String, String> goldLabel1 = new Hashtable<String, String>();
 		goldLabel1.put("objectName", "url1");
 		goldLabel1.put("correctCategory", "category1");
@@ -48,7 +52,7 @@ public class DSTests {
 		Form formData = new Form();
 		formData.add("id", existingModelID);
 		
-		ArrayList<Hashtable<String, String>> goldLabels = new ArrayList<>();
+		ArrayList<Hashtable<String, String>> goldLabels = new ArrayList<Hashtable<String, String>>();
 		Hashtable<String, String> goldLabel1 = new Hashtable<String, String>();
 		goldLabel1.put("objectName", "url1");
 		goldLabel1.put("correctCategory", "category1");
@@ -75,7 +79,7 @@ public class DSTests {
 		Form formData = new Form();
 		formData.add("id", nonExistingModelID);
 		
-		ArrayList<Hashtable<String, String>> goldLabels = new ArrayList<>();
+		ArrayList<Hashtable<String, String>> goldLabels = new ArrayList<Hashtable<String, String>>();
 		Hashtable<String, String> goldLabel = new Hashtable<String, String>();
 		goldLabel.put("objectName", "url1");
 		goldLabel.put("correctCategory", "category1");
@@ -97,7 +101,7 @@ public class DSTests {
 		Form formData = new Form();
 		formData.add("id", existingModelID);
 		
-		ArrayList<Hashtable<String, String>> goldLabels = new ArrayList<>();
+		ArrayList<Hashtable<String, String>> goldLabels = new ArrayList<Hashtable<String, String>>();
 		Hashtable<String, String> goldLabel = new Hashtable<String, String>();
 		goldLabel.put("objectName", "url1");
 		goldLabel.put("correctCategory", "category1");
@@ -120,7 +124,7 @@ public class DSTests {
 		Form formData = new Form();
 		formData.add("id", "12345");
 		
-		ArrayList<Hashtable<String, String>> labels = new ArrayList<>();
+		ArrayList<Hashtable<String, String>> labels = new ArrayList<Hashtable<String, String>>();
 		Hashtable<String, String> label = new Hashtable<String, String>();
 		label.put("workerName", "url1");
 		label.put("objectName", "category1");
@@ -143,7 +147,7 @@ public class DSTests {
 		Form formData = new Form();
 		formData.add("id", "12345");
 			
-		ArrayList<Hashtable<String, Object>> categories = new ArrayList<>();
+		ArrayList<Hashtable<String, Object>> categories = new ArrayList<Hashtable<String, Object>>();
 		Hashtable<String, Double> missClasificationCost = new Hashtable<String, Double>();
 		missClasificationCost.put("notporn", 1.0);
 		missClasificationCost.put("porn", 0.5);

@@ -1,12 +1,14 @@
 package troiaApiTester.tests;
 
-import org.junit.Test;
-import troiaApiTester.helpers.*;
 import junit.framework.Assert;
+
+import org.junit.Test;
+
+import troiaApiTester.helpers.BaseServerResponse;
+import troiaApiTester.helpers.RequestUtils;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-import com.sun.research.ws.wadl.Request;
 
 
 public class DiagnosticsTests {
