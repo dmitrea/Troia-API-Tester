@@ -48,7 +48,7 @@ public class DiagnosticsTests {
 		Assert.assertEquals(200, serverResponse.getStatus());
 
 		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
-		Assert.assertEquals("Request model with id: 12345 does not exist", baseServerResponse.getMessage().trim());
+		Assert.assertEquals("Request model with id: " + existingModelID + " does not exist", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Failure", baseServerResponse.getStatus());
 	}
 	

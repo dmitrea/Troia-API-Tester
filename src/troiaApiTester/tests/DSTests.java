@@ -122,7 +122,7 @@ public class DSTests {
 	public void testLoadWorkerAssignedLabel() {
 		String resourcePath = "loadWorkerAssignedLabel";
 		Form formData = new Form();
-		formData.add("id", "12345");
+		formData.add("id", existingModelID);
 		
 		ArrayList<Hashtable<String, String>> labels = new ArrayList<Hashtable<String, String>>();
 		Hashtable<String, String> label = new Hashtable<String, String>();
@@ -137,7 +137,7 @@ public class DSTests {
 		Assert.assertEquals(200, serverResponse.getStatus());
         
 		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
-        Assert.assertEquals("Job with id 12345 doesn't exist", baseServerResponse.getMessage().trim());
+        Assert.assertEquals("Job with id " + existingModelID +" doesn't exist", baseServerResponse.getMessage().trim());
 		Assert.assertEquals("Failure", baseServerResponse.getStatus());
 	}
 	
@@ -145,7 +145,7 @@ public class DSTests {
 	public void testLoadCategories() {
 		String resourcePath = "loadCategories";
 		Form formData = new Form();
-		formData.add("id", "12345");
+		formData.add("id", existingModelID);
 			
 		ArrayList<Hashtable<String, Object>> categories = new ArrayList<Hashtable<String, Object>>();
 		Hashtable<String, Double> missClasificationCost = new Hashtable<String, Double>();
