@@ -1,26 +1,27 @@
-package troiaApiTester.tests;
+package test.java.com.apitests.tests;
 
 import junit.framework.Assert;
-
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import troiaApiTester.helpers.BaseServerResponse;
-import troiaApiTester.helpers.RequestUtils;
-
+import test.java.com.apitests.helpers.*;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
-
 public class DiagnosticsTests {
 	
-	//temporary static IDs for some existing/nonExisting db objects - until the api is updated and the proper setUp/teardown methods are put in place 
-	public static String nonExistingModelID = "test12345";
-	public static String existingModelID = "12345";
+	static String existingModelID, nonExistingModelID;
+	
+	@BeforeClass
+	public static void TestSuiteSetup(){
+		TestPropertiesLoader properties = new TestPropertiesLoader();
+		existingModelID = properties.GetProperty("db.existing.model.id");
+		nonExistingModelID =  properties.GetProperty("db.non.existing.model.id");
+	}
 	
 	@Test
 	public void testPing() {
 		String resourcePath = "ping";
-		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath);
+		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(resourcePath);
 		Assert.assertEquals(200, serverResponse.getStatus());
 		
 		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
@@ -31,7 +32,7 @@ public class DiagnosticsTests {
 	@Test
 	public void testPingDB() {
 		String resourcePath = "pingDB";
-		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath);
+		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(resourcePath);
 		Assert.assertEquals(200, serverResponse.getStatus());
 		
 		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
@@ -39,13 +40,13 @@ public class DiagnosticsTests {
 		Assert.assertEquals("Success", baseServerResponse.getStatus());
 	}
 	
-	//@Test
+	@Test
 	public void testExists_NonExistingModelID() {
 		String resourcePath = "exists";
 		MultivaluedMapImpl params = new MultivaluedMapImpl();
 		params.add("id", nonExistingModelID);
-		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath, params);
-		Assert.assertEquals(200, serverResponse.getStatus());
+		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(resourcePath, params);
+		Assert.assertEquals(404, serverResponse.getStatus());
 
 		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
 		Assert.assertEquals("Request model with id: " + existingModelID + " does not exist", baseServerResponse.getMessage().trim());
@@ -57,7 +58,7 @@ public class DiagnosticsTests {
 		String resourcePath = "exists";
 		MultivaluedMapImpl params = new MultivaluedMapImpl();
 		params.add("id", existingModelID);
-		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath, params);
+		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(resourcePath, params);
 		Assert.assertEquals(200, serverResponse.getStatus());
 
 		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
@@ -70,8 +71,8 @@ public class DiagnosticsTests {
 		String resourcePath = "reset";
 		MultivaluedMapImpl params = new MultivaluedMapImpl();
 		params.add("id", nonExistingModelID);
-		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath, params);
-		Assert.assertEquals(200, serverResponse.getStatus());
+		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(resourcePath, params);
+		Assert.assertEquals(404, serverResponse.getStatus());
 
 		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
 		Assert.assertEquals("Job with id " + nonExistingModelID + " doesn't exist", baseServerResponse.getMessage());
@@ -83,7 +84,7 @@ public class DiagnosticsTests {
 		String resourcePath = "reset";
 		MultivaluedMapImpl params = new MultivaluedMapImpl();
 		params.add("id", existingModelID);
-		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(RequestUtils.SERVER_BASE_URL, resourcePath, params);
+		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(resourcePath, params);
 		Assert.assertEquals(200, serverResponse.getStatus());
 
 		BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));

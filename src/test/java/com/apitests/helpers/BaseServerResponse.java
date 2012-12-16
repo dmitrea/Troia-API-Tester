@@ -1,4 +1,4 @@
-package troiaApiTester.helpers;
+package test.java.com.apitests.helpers;
 
 import com.google.gson.Gson;
 
