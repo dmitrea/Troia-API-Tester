@@ -17,12 +17,6 @@ public class TestPropertiesLoader {
 		FileInputStream propertiesFile = null;
 		try {
 			propertiesFile = new FileInputStream(f1.getCanonicalPath().toString());
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-        
-		try {
 			props.load(propertiesFile);
 		} 
 		catch (IOException e) {
