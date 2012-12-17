@@ -11,7 +11,7 @@ public class GoldLabel {
 	}
 	
 	public GoldLabel(String objectName, String correctCategory){
-		this.labelData = new Hashtable<>();
+		this.labelData = new Hashtable<String, String>();
 		this.labelData.put("objectName", objectName);
 		this.labelData.put("correctCategory", correctCategory);
 	}
