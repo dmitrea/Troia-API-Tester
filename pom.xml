@@ -74,7 +74,7 @@
 			<version>3.1</version>
 			<configuration>
 				<goalPrefix>glassfish</goalPrefix>
-				<app>../Troia-Server/target/GetAnotherLabel.war </app>
+				<app>../Troia-Server/troia-server/target/troia-server-0.0.1.war</app>
 				<port>8080</port> 
 				<contextRoot>GetAnotherLabel</contextRoot> 
 				<autoDelete>true</autoDelete>
