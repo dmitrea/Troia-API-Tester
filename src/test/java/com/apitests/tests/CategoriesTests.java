@@ -13,20 +13,17 @@ import test.java.com.apitests.helpers.*;
 
 public class CategoriesTests {
 	
-	static String existingModelId, nonexistingModelId;
-
+	static String jobId;
+	
 	@BeforeClass
 	public static void TestSuiteSetup(){
-		TestPropertiesLoader properties = new TestPropertiesLoader();
-		existingModelId = properties.GetProperty("db.existing.model.id");
-		nonexistingModelId =  properties.GetProperty("db.non.existing.model.id");
+		jobId = TestHelpers.createNewJob();
 	}
 	
 	@Test
-	public void testLoadCategories_ValidData() {
-		String resourcePath = "loadCategories";
+	public void test_Put_Categories() {
+		String resourcePath = "/jobs/" + jobId + "/categories";
 		Form formData = new Form();
-		formData.add("id", existingModelId);
 			
 		ArrayList<Hashtable<String, Object>> categories = new ArrayList<Hashtable<String, Object>>();
 		Hashtable<String, Double> missClasificationCost = new Hashtable<String, Double>();
@@ -46,10 +43,21 @@ public class CategoriesTests {
 		categories.add(category2);
 
 		formData.add("categories", categories);
-		ClientResponse serverResponse = RequestUtils.InvokePostRequest(resourcePath, formData);
-        BaseServerResponse baseServerResponse = new BaseServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
-			
-        Assert.assertEquals("Built a request model with 2 categories", baseServerResponse.getMessage().trim());
-		Assert.assertEquals("Success", baseServerResponse.getStatus());
+		ClientResponse serverResponse = RequestUtils.InvokePutRequest(resourcePath, formData);
+        ComputedServerResponse computedServerResponse = new ComputedServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
+
+		Assert.assertEquals("OK", computedServerResponse.getStatus());
+		Assert.assertNotNull(computedServerResponse.getRedirect());
+	}
+	
+	@Test
+	public void test_Get_Categories() {
+		String resourcePath = "/jobs/" + jobId + "/categories";
+		
+		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(resourcePath);
+        ComputedServerResponse computedServerResponse = new ComputedServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
+
+		Assert.assertEquals("OK", computedServerResponse.getStatus());
+		Assert.assertNotNull(computedServerResponse.getRedirect());
 	}
 }

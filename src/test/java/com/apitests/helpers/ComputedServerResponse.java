@@ -2,30 +2,30 @@ package test.java.com.apitests.helpers;
 
 import com.google.gson.Gson;
 
-public class BaseServerResponse implements IServerResponse {
+public class ComputedServerResponse implements IServerResponse {
 	
 	private String timestamp;
-	private String result;
 	private String status;
+	private String redirect;
 	
-	public BaseServerResponse(){
-		this.result = new String();
-		this.status = new String();
+	public ComputedServerResponse(){
 		this.timestamp = new String();	
+		this.status = new String();
+		this.redirect = new String();
 	}
 	
-	public BaseServerResponse(String result, String status, String timestamp) {
+	public ComputedServerResponse(String timestamp,  String status, String redirect) {
 		super();
-		this.result = result;
-		this.status = status;
 		this.timestamp = timestamp;
+		this.status = status;
+		this.redirect = redirect;
 	}
 	
-	public String getResult() {
-		return this.result;
+	public String getRedirect() {
+		return this.redirect;
 	}
-	public void setResult(String result) {
-		this.result = result;
+	public void setRedirect(String redirect) {
+		this.redirect = redirect;
 	}
 	public String getStatus() {
 		return status;
@@ -41,7 +41,7 @@ public class BaseServerResponse implements IServerResponse {
 	}
 
 	@Override
-	public BaseServerResponse getResponseFromJson(String stringResponse) {
+	public ComputedServerResponse getResponseFromJson(String stringResponse) {
 		// TODO Auto-generated method stub
 		return new Gson().fromJson(stringResponse, this.getClass());
 	}

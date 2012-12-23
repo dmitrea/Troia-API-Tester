@@ -25,11 +25,6 @@ public class RequestUtils {
 		return webResource.get(ClientResponse.class);
 	}
 	
-	public static ClientResponse InvokeGetRequest(String resourcePath, MultivaluedMap<String, String> queryParams) {
-	    WebResource webResource = new Client().resource(SERVER_BASE_URL).path(resourcePath).queryParams(queryParams);
-		return webResource.get(ClientResponse.class);
-	}
-
 	public static ClientResponse InvokeGetRequest(String uri, String resourcePath, MultivaluedMap<String, String> queryParams) {
 	    WebResource webResource = new Client().resource(uri).path(resourcePath).queryParams(queryParams);
 		return webResource.get(ClientResponse.class);
@@ -43,4 +38,34 @@ public class RequestUtils {
         WebResource webResource = client.resource(SERVER_BASE_URL).path(resourcePath);
         return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class, formData);
 	}
+	
+	public static ClientResponse InvokePutRequest(String resourcePath) {
+		WebResource webResource = new Client().resource(SERVER_BASE_URL).path(resourcePath);
+		return webResource.put(ClientResponse.class);
+	}
+	
+	public static ClientResponse InvokePutRequest(String resourcePath, Form formData)
+	{	
+		ClientConfig clientConfig = new DefaultClientConfig();
+		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+        Client client = Client.create(clientConfig);
+        WebResource webResource = client.resource(SERVER_BASE_URL).path(resourcePath);
+        return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).put(ClientResponse.class, formData);
+	}
+	
+	public static ClientResponse InvokeDeleteRequest(String resourcePath, Form formData)
+	{	
+		ClientConfig clientConfig = new DefaultClientConfig();
+		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+        Client client = Client.create(clientConfig);
+        WebResource webResource = client.resource(SERVER_BASE_URL).path(resourcePath);
+        return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).delete(ClientResponse.class, formData);
+	}
+	
+	public static ClientResponse InvokeDeleteRequest(String resourcePath) {
+		WebResource webResource = new Client().resource(SERVER_BASE_URL).path(resourcePath);
+		return webResource.delete(ClientResponse.class);
+	}
+	
+	
 }
