@@ -23,7 +23,7 @@ public class TestHelpers {
 		String resourcePath = "jobs";
 		Form formData = new Form();
 		formData.add("id", "");
-		JSONObject response = RequestUtils.InvokePostRequest(resourcePath, formData, 405);
+		JSONObject response = RequestUtils.InvokePostRequest(resourcePath, formData, 200);
 		String result = response.get("result").toString();
 		System.out.println(result);
 		return result.split(":")[1].trim();
