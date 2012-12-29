@@ -12,6 +12,12 @@
 		<version>2.0-m12</version>
 	</dependency>
 	<dependency>
+	      <groupId>com.jayway.restassured</groupId>
+	      <artifactId>rest-assured</artifactId>
+	      <version>1.7.2</version>
+	      <scope>test</scope>
+	</dependency>
+	<dependency>
 		<groupId>javax.ws.rs</groupId>
 		<artifactId>jsr311-api</artifactId>
 		<version>0.11</version>
@@ -31,6 +37,23 @@
 		<artifactId>jersey-bundle</artifactId>
 		<version>1.10</version>
 	</dependency>  
+	<dependency>
+		<groupId>com.sun.jersey.jersey-test-framework</groupId>
+		<artifactId>jersey-test-framework-core</artifactId>
+		<version>1.9</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>com.sun.jersey.jersey-test-framework</groupId>
+		<artifactId>jersey-test-framework-external</artifactId>
+		<version>1.9</version>
+	</dependency>
+	<dependency>
+   <groupId>com.cedarsoft.serialization</groupId>
+   <artifactId>jackson</artifactId>
+   <version>4.0.6</version>
+   <classifier>jar-with-dependencies</classifier>
+</dependency>
   </dependencies>
   <name>Troia API Tester</name>
   <build>

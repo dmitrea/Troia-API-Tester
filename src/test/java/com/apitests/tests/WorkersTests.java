@@ -28,9 +28,9 @@ public class WorkersTests {
 		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(resourcePath);
 		Assert.assertEquals(200, serverResponse.getStatus());
         
-		ComputedServerResponse computedServerResponse = new ComputedServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
-		Assert.assertEquals("OK", computedServerResponse.getStatus());
-		Assert.assertNotNull(computedServerResponse.getRedirect());
+		RedirectServerResponse redirectServerResponse = new RedirectServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
+		Assert.assertEquals("OK", redirectServerResponse.getStatus());
+		Assert.assertNotNull(redirectServerResponse.getRedirect());
 	}
 	
 	@Test
@@ -55,9 +55,22 @@ public class WorkersTests {
 		serverResponse = RequestUtils.InvokeGetRequest(resourcePath);
 		Assert.assertEquals(200, serverResponse.getStatus());        
 		
-		ComputedServerResponse computedServerResponse = new ComputedServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
-		Assert.assertEquals("OK", computedServerResponse.getStatus());
-		Assert.assertNotNull(computedServerResponse.getRedirect());
+		RedirectServerResponse redirectServerResponse = new RedirectServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
+		Assert.assertEquals("OK", redirectServerResponse.getStatus());
+
+		//check that the redirect shows the correct information
+		BaseServerResponse baseServerResponse  = TestHelpers.getJobStatus(jobId, redirectServerResponse.getRedirect());
+		Assert.assertEquals("OK", baseServerResponse.getStatus());
+				
+		//GET the workers 
+		serverResponse = RequestUtils.InvokeGetRequest(resourcePath);
+		redirectServerResponse = new RedirectServerResponse().getResponseFromJson(serverResponse.getEntity(String.class)); 
+		Assert.assertEquals("OK", redirectServerResponse.getStatus());
+				
+		//check that the redirect shows the correct information
+		//baseServerResponse  = TestHelpers.getJobStatus(jobId, redirectServerResponse.getRedirect());
+		//System.out.println(baseServerResponse.getResult());
+		//Assert.assertEquals("OK", baseServerResponse.getStatus());
 		
 	}
 	  
@@ -68,9 +81,9 @@ public class WorkersTests {
 		ClientResponse serverResponse = RequestUtils.InvokeGetRequest(resourcePath);
 		Assert.assertEquals(200, serverResponse.getStatus());
         
-		ComputedServerResponse computedServerResponse = new ComputedServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
-		Assert.assertEquals("OK", computedServerResponse.getStatus());
-		Assert.assertNotNull(computedServerResponse.getRedirect());
+		RedirectServerResponse redirectServerResponse = new RedirectServerResponse().getResponseFromJson(serverResponse.getEntity(String.class));
+		Assert.assertEquals("OK", redirectServerResponse.getStatus());
+		Assert.assertNotNull(redirectServerResponse.getRedirect());
 	}
 	
 	
