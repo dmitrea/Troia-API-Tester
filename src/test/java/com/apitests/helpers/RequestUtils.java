@@ -5,10 +5,13 @@ import javax.ws.rs.core.MediaType;
 import junit.framework.Assert;
 
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.codehaus.jettison.json.JSONString;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -27,19 +30,17 @@ public class RequestUtils {
 	    return webResource.get(JSONObject.class);
 	}
 		
-	public static JSONObject InvokePostRequest(String resourcePath, Form formData, int expectedHttpResponseCode)
+	public static JSONObject InvokePostRequest(String resourcePath, Form formData, int expectedHttpResponseCode) throws JSONException
 	{	
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
         WebResource webResource = client.resource(SERVER_BASE_URL).path(resourcePath);   
-        Assert.assertEquals(expectedHttpResponseCode, webResource.get(ClientResponse.class).getStatus());
-        return webResource.type(MediaType.APPLICATION_JSON).post(JSONObject.class, formData);
+        return webResource.type(MediaType.APPLICATION_JSON).post(JSONObject.class, formData);       
 	}
 	
 	public static JSONObject InvokePutRequest(String resourcePath, int expectedHttpResponseCode) {
 		WebResource webResource = new Client().resource(SERVER_BASE_URL).path(resourcePath);
-        Assert.assertEquals(expectedHttpResponseCode, webResource.get(ClientResponse.class).getStatus());
 		return webResource.put(JSONObject.class);
 	}
 	
@@ -49,27 +50,24 @@ public class RequestUtils {
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
         WebResource webResource = client.resource(SERVER_BASE_URL).path(resourcePath);
-        Assert.assertEquals(expectedHttpResponseCode, webResource.get(ClientResponse.class).getStatus());
         return webResource.type(MediaType.APPLICATION_JSON).put(JSONObject.class, formData);
 	}
 	
-	public static JSONObject InvokeDeleteRequest(String resourcePath, int expectedHttpResponseCode)
+	public static void InvokeDeleteRequest(String resourcePath, int expectedHttpResponseCode)
 	{	
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 		Client client = Client.create(clientConfig);
 		WebResource webResource = client.resource(SERVER_BASE_URL).path(resourcePath);
-        Assert.assertEquals(expectedHttpResponseCode, webResource.get(ClientResponse.class).getStatus());
-	    return webResource.type(MediaType.APPLICATION_JSON).delete(JSONObject.class);
+	    webResource.type(MediaType.APPLICATION_JSON).delete();
 	}	
 	
-	public static JSONObject InvokeDeleteRequest(String resourcePath, Form formData, int expectedHttpResponseCode)
+	public static void InvokeDeleteRequest(String resourcePath, Form formData, int expectedHttpResponseCode)
 	{	
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 		Client client = Client.create(clientConfig);
 		WebResource webResource = client.resource(SERVER_BASE_URL).path(resourcePath);
-        Assert.assertEquals(expectedHttpResponseCode, webResource.get(ClientResponse.class).getStatus());
-	    return webResource.type(MediaType.APPLICATION_JSON).delete(JSONObject.class, formData);
+	    webResource.type(MediaType.APPLICATION_JSON).delete(formData);
 	}	
 }

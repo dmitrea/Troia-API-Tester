@@ -3,8 +3,6 @@ package test.java.com.apitests.tests;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
-
 import junit.framework.Assert;
 
 import org.codehaus.jettison.json.JSONArray;

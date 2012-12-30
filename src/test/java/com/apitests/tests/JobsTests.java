@@ -25,10 +25,11 @@ public class JobsTests {
 	public void testCreateJob_JobIdProvided() throws JSONException {
 		String resourcePath = "jobs";
 		Form formData = new Form();
-		formData.add("id", TestHelpers.generateRandomJobId());
+		String jobId = TestHelpers.generateRandomJobId();
+		formData.add("id", jobId);
 		JSONObject response = RequestUtils.InvokePostRequest(resourcePath, formData, 200);
 
-		Assert.assertEquals("New job created with ID: 12", response.get("result"));
+		Assert.assertEquals("New job created with ID: " + jobId, response.get("result"));
 		Assert.assertEquals("OK", response.get("status"));
 	}
 	
@@ -54,28 +55,23 @@ public class JobsTests {
 		formData.add("id", jobId);
 		JSONObject response = RequestUtils.InvokePostRequest(resourcePath, formData, 200);
 		
-		response = RequestUtils.InvokeDeleteRequest("jobs/" + jobId, 200);
-		Assert.assertEquals("Removed job with ID: " + jobId, response.get("result"));
-		Assert.assertEquals("OK", response.get("status"));
+		RequestUtils.InvokeDeleteRequest(resourcePath, formData, 200);
 	}
 	
 	@Test
 	public void testDeleteNonExistingJobId() throws JSONException {
 		String randomJobId = TestHelpers.generateRandomJobId();
 		String resourcePath = "jobs/" + randomJobId;
-		JSONObject response = RequestUtils.InvokeDeleteRequest(resourcePath, 200);
-		
-		Assert.assertEquals("Removed job with ID: " + randomJobId, response.get("result"));
-		Assert.assertEquals("OK", response.get("status"));
+		RequestUtils.InvokeDeleteRequest(resourcePath, 200);
 	}
 	
 	@Test
 	public void testGet_NonExistingJobId() throws JSONException {
-		String randomJobId = TestHelpers.generateRandomJobId();
-		String resourcePath = "jobs/" + randomJobId;
-		JSONObject response = RequestUtils.InvokeGetRequest(resourcePath, 405);
+		String jobId = TestHelpers.generateRandomJobId();
+		String resourcePath = "jobs/" + jobId;
+		JSONObject response = RequestUtils.InvokeGetRequest(resourcePath, 400);
 		
-		Assert.assertEquals("Job with ID: " + randomJobId + " does not exist", response.get("result"));
+		Assert.assertEquals("Job with ID: " + jobId + " does not exist", response.get("result"));
 		Assert.assertEquals("ERROR", response.get("status"));
 	}
 	

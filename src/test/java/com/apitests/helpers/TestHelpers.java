@@ -1,12 +1,8 @@
 package test.java.com.apitests.helpers;
 
-import junit.framework.Assert;
-
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.representation.Form;
 
 public class TestHelpers {
